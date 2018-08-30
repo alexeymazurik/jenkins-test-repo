@@ -4,7 +4,9 @@ pipeline {
   stages {
     stage ('Build Stage') {
       steps {
-        sh 'example.sh'
+        script {
+          sh 'example.sh'
+        }
       }
     }
   }
