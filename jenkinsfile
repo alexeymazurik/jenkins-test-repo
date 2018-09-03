@@ -1,6 +1,9 @@
 #!groovy
-node('node') {
+node {
   currentBuild.result = "SUCCESS"
+
+  def nodeHome = tool 'nodejs8'
+  env.PATH="${env.PATH}:${nodeHome}/bin"
 
   try {
     stage('Checkout'){
