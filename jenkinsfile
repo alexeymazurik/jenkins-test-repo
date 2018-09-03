@@ -1,23 +1,27 @@
-#!groovy
-node {
-  currentBuild.result = "SUCCESS"
-
-  def nodeHome = tool 'nodejs8'
-  env.PATH="${env.PATH}:${nodeHome}/bin"
-
-  try {
-    stage('Checkout'){
-      checkout scm
-    }
-
-    stage('Build'){
-      sh 'node -v'
-      sh 'npm i'
-      sh './node_modules/bower/bin/bower i'
+pipeline {
+  agent {
+    docker {
+      image 'node:8.11.4-alpine'
+      args '-u 0:0'
     }
   }
-  catch(err) {
-    currentBuild.result = "SUCCESS"
-    throw err
+   stages {
+    stage ('Build') {
+      steps {
+        script {
+          sh "npm install"
+          sh "npm install bower"
+          sh "./node_modules/bower/bin/bower i --allow-root"
+        }
+      }
+    }
+     stage ('Test') {
+      steps {
+        script {
+          sh "npm install -g eslint"
+          sh "eslint --ext .js src/"
+        }
+      }
+    }
   }
 }
