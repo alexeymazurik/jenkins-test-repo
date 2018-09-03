@@ -1,0 +1,22 @@
+{
+  "name": "jenkins-test-repo",
+  "version": "1.0.0",
+  "description": "[![Build Status](http://207.154.197.251:8080/buildStatus/icon?job=TestJenkins2/fix%2Fjenkins-fix)](http://207.154.197.251:8080/job/TestJenkins2/job/fix%252Fjenkins-fix/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexeymazurik/jenkins-test-repo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexeymazurik/jenkins-test-repo/issues"
+  },
+  "homepage": "https://github.com/alexeymazurik/jenkins-test-repo#readme",
+  "dependencies": {
+    "bower": "^1.8.4"
+  }
+}
