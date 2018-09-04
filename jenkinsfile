@@ -2,9 +2,11 @@ pipeline {
   agent {
     docker {
       image 'node:8.11.4'
+      args '-u 0:0'
     }
   }
-   stages {
+
+  stages {
     stage ('Build') {
       steps {
         script {
@@ -13,5 +15,14 @@ pipeline {
         }
       }
     }
+
+    /* stage ('Test') {
+      steps {
+        script {
+          sh "npm install -g eslint"
+          sh "eslint --ext .js src/"
+        }
+      }
+    } */
   }
 }
