@@ -13,7 +13,7 @@ pipeline {
         sh 'node --version; npm --version'
         sh 'npm install'
         sh 'ls -la ./node_modules'
-        sh 'git --version'
+        sh './node_modules/.bin/bower install --allow-root'
       }
     }
     // stage ('Build') {
