@@ -8,7 +8,7 @@ pipeline {
 
   stages {
 
-    stage ('Prepare') {
+    stage ('Build') {
       steps {
         sh 'node --version; npm --version'
         sh 'npm install'
@@ -16,22 +16,13 @@ pipeline {
         sh './node_modules/.bin/bower install --allow-root'
       }
     }
-    // stage ('Build') {
-    //   steps {
-    //     script {
-    //       sh "npm install"
-    //       sh "./node_modules/bower/bin/bower install"
-    //     }
-    //   }
-    // }
 
-    /* stage ('Test') {
+    stage ('Test') {
       steps {
         script {
-          sh "npm install -g eslint"
-          sh "eslint --ext .js src/"
+          sh "./node_modules/.bin/eslint --ext .js src/"
         }
       }
-    } */
+    }
   }
 }
