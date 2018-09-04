@@ -35,18 +35,16 @@ try {
 
   }
 } */
-#!groovy 
-node {
-  stage('Build') {
-    try {
-      docker.image('node').inside('-u node') {
-        sh 'node -v'
-        sh 'npm install'
+pipeline {
+  agent any
+
+  tool { nodejs "node" }
+
+  stages {
+    stage('Build') {
+      steps {
+        sh 'npm config ls'
       }
-    }
-    catch (exc) {
-      echo 'Something failed.'
-      throw exc
     }
   }
 }
