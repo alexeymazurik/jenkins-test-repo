@@ -8,6 +8,8 @@ pipeline {
     stage ('Prepare') {
       steps {
         sh 'node --version; npm --version'
+        sh 'bower --version'
+        sh 'git --version'
         sh 'ls -la'
       }
     }
