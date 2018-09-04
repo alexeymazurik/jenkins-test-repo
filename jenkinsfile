@@ -1,8 +1,7 @@
-/* pipeline {
+pipeline {
   agent {
     docker {
-      image 'node:8.11.4-alpine'
-      args '-p 3000:3000'
+      image 'node:8.11.4'
     }
   }
    stages {
@@ -12,38 +11,6 @@
           sh "npm install"
           sh "./node_modules/bower/bin/bower install"
         }
-      }
-    }
-
-    stage ('Test') {
-      steps {
-        script {
-          sh "npm install -g eslint"
-          sh "eslint --ext .js src/"
-        }
-      }
-    }
-  }
-}
-
-#!/usr/bin/env groovy
-
-def imageName = ''
-
-try {
-  node('') {
-
-  }
-} */
-pipeline {
-  agent any
-
-  tool { nodejs "node" }
-
-  stages {
-    stage('Build') {
-      steps {
-        sh 'npm config ls'
       }
     }
   }
