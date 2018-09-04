@@ -8,7 +8,7 @@ pipeline {
 
   stages {
 
-    stage ('Build') {
+    stage ('Prepare') {
       steps {
         sh 'node --version; npm --version'
         sh 'npm install'
@@ -20,7 +20,17 @@ pipeline {
     stage ('Test') {
       steps {
         script {
-          sh "./node_modules/.bin/eslint --ext .js src/"
+          sh './node_modules/.bin/eslint --ext .js src/'
+        }
+      }
+    }
+
+    stage ('Build') {
+      steps {
+        script {
+          sh 'tar -zcvf app.tar.gz src'
+          sh 'scp app.tar.gz root@104.248.51.10:/root'
+          sh 'ssh root@104.248.51.10 sh build.sh'
         }
       }
     }
