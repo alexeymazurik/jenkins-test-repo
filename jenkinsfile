@@ -1,4 +1,4 @@
-pipeline {
+/* pipeline {
   agent {
     docker {
       image 'node:8.11.4-alpine'
@@ -22,6 +22,31 @@ pipeline {
           sh "eslint --ext .js src/"
         }
       }
+    }
+  }
+}
+
+#!/usr/bin/env groovy
+
+def imageName = ''
+
+try {
+  node('') {
+
+  }
+} */
+
+node {
+  stage('Build') {
+    try {
+      docker.image('node').inside('-u node') {
+        sh 'node -v'
+        sh 'npm install'
+      }
+    }
+    catch (exc) {
+      echo 'Something failed.'
+      throw exc
     }
   }
 }
