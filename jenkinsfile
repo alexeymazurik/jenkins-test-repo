@@ -13,6 +13,7 @@ pipeline {
         sh 'node --version; npm --version'
         sh 'npm install'
         sh 'ls -la ./node_modules'
+        sh 'git --version'
       }
     }
     // stage ('Build') {
