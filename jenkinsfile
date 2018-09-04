@@ -6,7 +6,9 @@ pipeline {
   stages {
 
     stage ('Prepare') {
-      sh 'node --version'
+      steps {
+        sh 'node --version'
+      }
     }
     // stage ('Build') {
     //   steps {
