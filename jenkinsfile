@@ -35,7 +35,7 @@ try {
 
   }
 } */
-
+#!groovy 
 node {
   stage('Build') {
     try {
