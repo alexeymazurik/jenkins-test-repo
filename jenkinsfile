@@ -29,7 +29,7 @@ pipeline {
       steps {
         script {
           // sh 'tar -zcvf app.tar.gz src'
-          sshagent(['jenkins-ssh']) {
+          sshagent(['test-identity']) {
             // sh 'echo SSH_AUTH_SOCK=$SSH_AUTH_SOCK'
             // sh 'ls -al $SSH_AUTH_SOCK || true'
             // sh 'ssh -vvv -o StrictHostKeyChecking=no ubuntu@example.org uname -a'
