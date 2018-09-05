@@ -28,6 +28,7 @@ pipeline {
     stage ('Build') {
       steps {
         script {
+          sh 'ssh-add -l'
           sh 'tar -zcvf app.tar.gz src'
           sh 'scp app.tar.gz root@104.248.51.10:/root'
           sh 'ssh root@104.248.51.10 sh build.sh'
