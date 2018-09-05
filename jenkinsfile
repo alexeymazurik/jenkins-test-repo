@@ -27,6 +27,14 @@ pipeline {
         }
       }
     }
+
+    stage('Test') {
+      steps {
+        script {
+          sh 'echo "HELLO WORLD"'
+        }
+      }
+    }
     // stage ('Prepare') {
     //   steps {
     //     sh 'node --version; npm --version'
