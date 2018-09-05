@@ -23,6 +23,7 @@ pipeline {
           configFileProvider([configFile(fileId: ENV_FILE, variable: 'FILE')]) {
             sh 'cat $FILE >> config.json'
             sh 'cat config.json'
+            sh 'echo "HELLO WORLD"'
           }
         }
       }
