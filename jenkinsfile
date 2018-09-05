@@ -12,7 +12,7 @@ pipeline {
       steps {
         script {
           checkout scm
-          ENV_FILE = (BRANCH_NAME == 'master') ? 'config.production.json' : 'config.development.json'
+          ENV_FILE = (BRANCH_NAME == 'master') ? 'config-production' : 'config-development'
         }
       }
     }
