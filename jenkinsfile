@@ -20,7 +20,7 @@ pipeline {
     stage('Build') {
       steps {
         script {
-          withCredentials([file(credentialsId: ENV_FILE, variable: 'FILE')]) {
+          configFileProvider([configFile(fileId: ENV_FILE, variable: 'FILE')]) {
             sh 'cat $FILE >> config.json'
             sh 'config.json'
           }
