@@ -8,6 +8,25 @@ pipeline {
 
   stages {
 
+    stage('Generate Config Files') {
+      steps {
+        script {
+          checkout scm
+          ENV_FILE = (BRANCH_NAME == 'master') ? 'config.production.json' : 'config.development.json'
+        }
+      }
+    }
+
+    stage('Build') {
+      steps {
+        script {
+          withCredentials([file(credentialsId: ENV_FILE, variable: 'FILE')]) {
+            sh 'cat $FILE >> config.json'
+            sh 'config.json'
+          }
+        }
+      }
+    }
     // stage ('Prepare') {
     //   steps {
     //     sh 'node --version; npm --version'
@@ -24,17 +43,20 @@ pipeline {
     //     }
     //   }
     // }
+    // stage('Testing') {
+      
+    // }
 
-    stage ('Build') {
-      steps {
-        script {
-          sh 'tar -zcvf app.tar.gz src'
-          sshagent(credentials: ['12d7fb99-10af-4997-9ab9-852768d34e79']) {
-            sh 'scp -v -o StrictHostKeyChecking=no ./app.tar.gz root@104.248.51.10:/root'
-            sh 'ssh -o StrictHostKeyChecking=no root@104.248.51.10 "sh build.sh"'
-          }
-        }
-      }
-    }
+    // stage('Build') {
+    //   steps {
+    //     script {
+    //       sh 'tar -zcvf app.tar.gz src'
+    //       sshagent(credentials: ['12d7fb99-10af-4997-9ab9-852768d34e79']) {
+    //         sh 'scp -v -o StrictHostKeyChecking=no ./app.tar.gz root@104.248.51.10:/root'
+    //         sh 'ssh -o StrictHostKeyChecking=no root@104.248.51.10 "sh build.sh"'
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
