@@ -28,10 +28,14 @@ pipeline {
     stage ('Build') {
       steps {
         script {
-          sh 'ssh-add -l'
           sh 'tar -zcvf app.tar.gz src'
-          sh 'scp app.tar.gz root@104.248.51.10:/root'
-          sh 'ssh root@104.248.51.10 sh build.sh'
+          sshagent(['test-identity']) {
+            // sh 'echo SSH_AUTH_SOCK=$SSH_AUTH_SOCK'
+            // sh 'ls -al $SSH_AUTH_SOCK || true'
+            // sh 'ssh -vvv -o StrictHostKeyChecking=no ubuntu@example.org uname -a'
+            sh 'scp app.tar.gz root@104.248.51.10:/root'
+            sh 'ssh root@104.248.51.10 sh build.sh'
+          }
         }
       }
     }
