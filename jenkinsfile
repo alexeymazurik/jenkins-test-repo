@@ -30,7 +30,7 @@ pipeline {
         script {
           sh 'tar -zcvf app.tar.gz src'
           sshagent(credentials: ['12d7fb99-10af-4997-9ab9-852768d34e79']) {
-            sh 'scp ./app.tar.gz root@104.248.51.10:/root'
+            sh 'scp -v -o StrictHostKeyChecking=no ./app.tar.gz root@104.248.51.10:/root'
             sh 'ssh -o StrictHostKeyChecking=no root@104.248.51.10 "sh build.sh"'
           }
         }
